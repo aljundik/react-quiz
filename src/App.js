@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+import Answer from './answer'
 
 class App extends Component {
 
@@ -15,22 +16,18 @@ class App extends Component {
       userAnswer: '',
       isCorrect: false,
       submited: false
-
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleButton = this.handleButton.bind(this);
   }
+
   componentDidMount() {
     axios
       .get(`http://www.jservice.io/api/random`)
       .then(res => this.setState({ question: res.data[0].question, value: res.data[0].value, answer: res.data[0].answer }))
       //.then(res => console.log(res.data))
       .catch(err => console.log(err));
-
-
-
-    //console.log('everything is working just fine',this.state.question);
   }
 
   handleChange(event) {
@@ -54,8 +51,6 @@ class App extends Component {
     window.location.reload();
   }
 
-
-
   render() {
     const isCorrect = this.state.isCorrect;
     const submited = this.state.submited;
@@ -70,45 +65,24 @@ class App extends Component {
                   <p className=" questionTitle"> Question(value: {this.state.value} points): </p>
                   <p className="question">{this.state.question}</p>
                   <textarea rows="6" className="form-control col-center marging" placeholder={this.state.answer} value={this.state.userAnswer} onChange={this.handleChange} />
-
                   <div className="buttoncenter">
                     <input type="submit" value="SUBMIT" />
                   </div>
-
                 </form>
-
               </div>
-
               <div className="between">
-
               </div>
-
-
-              <div className="mainBody">
-             
-                <p className=" questionTitle"> Your answer is {isCorrect ? 'CORRECT' : 'WRONG'} </p>
-                <p className="questionTitle">Answer:</p>
-                <p className="question"> {!submited ? "" :this.state.answer } </p>
-
-                <div className="buttonnext ">
-                  <input type="button" value="NEXT" onClick={this.handleButton} />
-
-                </div>
-
-
-              </div>
-
+              <Answer 
+                submited={this.state.submited}
+                isCorrect={this.state.isCorrect}
+                ans={this.state.answer}
+                handleButton1={this.handleButton.bind(this) }
+              />
             </div>
             <div className="col-md-2"></div>
           </div>
         </div>
-
-
-
       </div>
-
-
-
     );
   }
 }
