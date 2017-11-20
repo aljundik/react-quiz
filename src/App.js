@@ -64,7 +64,7 @@ class App extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <p className=" questionTitle"> Question(value: {this.state.value} points): </p>
                   <p className="question">{this.state.question}</p>
-                  <textarea rows="6" className="form-control col-center marging" placeholder={this.state.answer} value={this.state.userAnswer} onChange={this.handleChange} />
+                  <textarea rows="6" className="form-control col-center marging" placeholder="Text area content" value={this.state.userAnswer} onChange={this.handleChange} />
                   <div className="buttoncenter">
                     <input type="submit" value="SUBMIT" />
                   </div>
